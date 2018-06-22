@@ -1,0 +1,143 @@
+	<!DOCTYPE html>
+	<head>
+		<title>demo</title>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<style type="text/css">
+		button{
+			position: fixed;
+			width: 100%;
+			height: 50px;
+			top: 0;
+			left: 0;
+		}
+		input{
+			position: relative;
+			width: 100px;
+			height: 50px;
+
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<video loop="loop" autoplay="autoplay" controls id="media" width="500" height="400" >
+			<source src="ocean.mp4" type="video/mp4" /> 
+		</video>
+		<button onclick="jietu()">截图</button>
+	</div>
+	<div id="bottom">
+		<canvas style="display: none;"></canvas>
+		<input type="button" value="保存图片" onclick="save_pic()">
+	</div>
+	<script type="text/javascript">
+		function jietu(){
+			var video = document.getElementById("media");
+//获取前台要截图的video对象，
+let canvas = document.querySelectorAll('canvas')[0];
+//获取前台的canvas对象，用于作图
+var ctx = canvas.getContext('2d');//设置canvas绘制2d图，
+var width = 500;//设置canvas宽
+var height = 300;//设置canvas高
+canvas.width = width;
+canvas.height = height;
+ctx.drawImage(video, 0, 0, width, height);
+//将video视频绘制到canvas中
+$('canvas').show();
+}
+ var bot;//画布div
+        var X,Y,X1,Y1;//坐标
+        var flag=0;
+        var time;//定时器ID
+        var color=0;//记住所选颜色
+        var lineW=2;//画笔粗细
+        var canvas;//创建画布
+        var context;//获取上下文
+        var isMouseDown=false;//记录鼠标是否按下
+
+        window.onload=function(){
+            //创建画布
+            canvas=document.querySelectorAll('canvas')[0];
+            //获取上下文	
+            context=canvas.getContext("2d");
+            bot=document.getElementById("bottom");
+            bot.onmousedown=mouseDownAction;
+            bot.onmousemove=mouseMoveAction;
+            document.onmouseup=mouseUpAction;
+        }
+
+        /**
+         *选中画笔颜色
+         */
+
+        /**
+         * 画笔粗细
+         */
+
+        /**
+         *鼠标按下
+         */
+         function mouseDownAction(e){
+         	isMouseDown=true;
+            //记录下鼠标点击的时候的位置
+            X= e.offsetX;
+            Y= e.offsetY;
+        }
+
+        /**
+         *鼠标移动
+         */
+         function mouseMoveAction(e){
+         	if(isMouseDown){
+         		X1= e.offsetX;
+         		Y1= e.offsetY;
+         		drowline(X,Y,X1,Y1);
+         		flag++;
+         	}
+         }
+
+        /**
+         *鼠标弹起来
+         */
+         function mouseUpAction(e){
+         	isMouseDown=false;
+         	flag=0;
+         }
+
+        /**
+         * 绘制
+         */
+         function drowline(num1,num2,num3,num4){
+            //开启新的路径
+            if(flag)
+            	context.beginPath();
+            //移动画笔的初始位置
+            context.moveTo(num1,num2);
+            //移动画笔的结束位置
+            context.lineTo(num3,num4);
+            //开始绘制
+            context.stroke();
+
+            if(flag!=0){
+            	X=X1;
+            	Y=Y1;
+            }
+        }
+
+        function save_pic(){//保存画图
+        	var str=canvas.toDataURL("image/png");
+        	for(var i=0;i<div.length;i++){
+        		if(div[i].innerHTML==""){
+        			var s="<img src='"+str+"' style='width: 250px;height: 250px;'>";
+        			div[i].innerHTML=s;
+        			break;
+        		}
+        	}
+        }
+
+        function clear_pic(){//清除画布
+        	context.clearRect(0,0,500,500);
+        }
+    </script>
+</body>
+</html>
+
