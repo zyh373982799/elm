@@ -125,13 +125,6 @@ $('canvas').show();
 
         function save_pic(){//保存画图
         	var str=canvas.toDataURL("image/png");
-        	for(var i=0;i<div.length;i++){
-        		if(div[i].innerHTML==""){
-        			var s="<img src='"+str+"' style='width: 250px;height: 250px;'>";
-        			div[i].innerHTML=s;
-        			break;
-        		}
-        	}
         }
 
         function clear_pic(){//清除画布
