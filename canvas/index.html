@@ -29,6 +29,7 @@
 		<canvas style="display: none;"></canvas>
 		<input type="button" value="保存图片" onclick="save_pic()">
 	</div>
+    <a></a>
 	<script type="text/javascript">
 		function jietu(){
 			var video = document.getElementById("media");
@@ -125,10 +126,7 @@ $('canvas').show();
 
         function save_pic(){//保存画图
         	var str=canvas.toDataURL("image/png");
-            console.log(str);
-            var save_link = document.createElement('a');
-            save_link.href = str;
-            save_link.download = "filename";
+            $("a").attr("href", str).attr("download", "a.png");
         }
 
         function clear_pic(){//清除画布
